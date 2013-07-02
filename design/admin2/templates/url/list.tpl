@@ -30,10 +30,10 @@
     <p class="table-preferences">
     {switch match=$number_of_items}
        {case match=10}
-        <a href={'/user/preferences/set/admin_urlm_list_limit/1'|ezurl}>10</a>
+        <span class="current">10</span>        
         <a href={'/user/preferences/set/admin_urlm_list_limit/2'|ezurl}>25</a>
         <a href={'/user/preferences/set/admin_urlm_list_limit/3'|ezurl}>50</a>
-        <span class="current">100</span>
+        <a href={'/user/preferences/set/admin_urlm_list_limit/4'|ezurl}>100</a>
         {/case}
 
     {case match=25}
@@ -98,7 +98,7 @@
 </div>
 
 <div class="block">
-<form action="" method="post">
+<form action="/urlm/list" method="post">
 <label for="filterBy">Url Filter:</label>
 <input type="text" name="filterBy" value="{$filter_by}"> <input type="submit" class="button" name="sbtn" value="Search">
 </form>
