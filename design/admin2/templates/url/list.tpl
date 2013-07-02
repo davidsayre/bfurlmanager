@@ -108,7 +108,7 @@
 
 {case}
 <span class="current">{'Modified'|i18n( 'design/admin/url/list' )}</span>
-<a href={'/urlm/list/(sort)/url'|ezurl} title="{'Sort by url.'|i18n( 'design/admin/url/list' )}">{'Url'|i18n( 'design/admin/url/list' )}</a>
+<a href={'/urlm/list/(sort_by)/url'|ezurl} title="{'Sort by url.'|i18n( 'design/admin/url/list' )}">{'Url'|i18n( 'design/admin/url/list' )}</a>
 {/case}
 
 {/switch}

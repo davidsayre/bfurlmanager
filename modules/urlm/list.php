@@ -30,7 +30,7 @@ if ( $http->hasPostVariable( 'filterBy' ) ){    //from form post
     $filterBy = $http->postVariable( 'filterBy' );
 }
 
-$sortBy = $UserParameters['sort']; //from pagination
+$sortBy = $UserParameters['sort_by']; //from pagination
 
 $offset = $Params['Offset'];
 if ( !is_numeric( $offset ) )
@@ -97,7 +97,7 @@ elseif( $ViewMode == 'invalid' )
 $list = bfURLFunctionCollection::fetchList( $listParameters ); // DJS use custom
 $listCount = bfURLFunctionCollection::fetchListCount( $countParameters );
 
-$viewParameters = array( 'offset' => $offset, 'limit'  => $limit, 'filter_by' => $filterBy );
+$viewParameters = array( 'offset' => $offset, 'limit'  => $limit, 'filter_by' => $filterBy, 'sort_by' => $sortBy );
 
 
 $tpl = eZTemplate::factory();
