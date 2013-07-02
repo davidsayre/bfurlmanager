@@ -9,6 +9,8 @@ $Module = $Params['Module'];
 $ViewMode = $Params['ViewMode'];
 $UserParameters = $Params['UserParameters'];
 $http = eZHTTPTool::instance();
+
+$limit = 10; //default
 if( eZPreferences::value( 'admin_urlm_list_limit' ) )
 {
     switch( eZPreferences::value( 'admin_urlm_list_limit' ) )
@@ -19,9 +21,15 @@ if( eZPreferences::value( 'admin_urlm_list_limit' ) )
         default:  { $limit = 10; } break;
     }
 }
-else
+
+$sortBy = 'modified'; //default
+if( eZPreferences::value( 'admin_urlm_list_sort' ) )
 {
-    $limit = 10;
+    switch( eZPreferences::value( 'admin_urlm_list_sort' ) )
+    {
+        case '2': { $sortBy = 'url'; } break;        
+        default:  { $sortBy = 'modified'; } break;
+    }
 }
 
 $filterBy = $UserParameters['filter_by']; //from pagination
@@ -29,8 +37,6 @@ $filterBy = $UserParameters['filter_by']; //from pagination
 if ( $http->hasPostVariable( 'filterBy' ) ){    //from form post 
     $filterBy = $http->postVariable( 'filterBy' );
 }
-
-$sortBy = $UserParameters['sort_by']; //from pagination
 
 $offset = $Params['Offset'];
 if ( !is_numeric( $offset ) )
@@ -97,7 +103,7 @@ elseif( $ViewMode == 'invalid' )
 $list = bfURLFunctionCollection::fetchList( $listParameters ); // DJS use custom
 $listCount = bfURLFunctionCollection::fetchListCount( $countParameters );
 
-$viewParameters = array( 'offset' => $offset, 'limit'  => $limit, 'filter_by' => $filterBy, 'sort_by' => $sortBy );
+$viewParameters = array( 'offset' => $offset, 'limit'  => $limit, 'filter_by' => $filterBy);
 
 
 $tpl = eZTemplate::factory();
@@ -107,7 +113,6 @@ $tpl->setVariable( 'url_list', $list );
 $tpl->setVariable( 'url_list_count', $listCount );
 $tpl->setVariable( 'view_mode', $ViewMode );
 $tpl->setVariable( 'filter_by', $filterBy );
-$tpl->setVariable( 'sort_by', $sortBy );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:url/list.tpl" );

@@ -1,8 +1,10 @@
 {let item_type=ezpreference( 'admin_urlm_list_limit' )
      number_of_items=min( $item_type, 4)|choose( 10, 10, 25, 50, 100 )}
 
+{let sort_type=ezpreference( 'admin_urlm_list_sort' )
+ sort_by_option=min( $sort_type, 2)|choose( 'modified', 'modified','url' )}
+
 {if is_set($filter_by)|not()} {def $filter_by = ''} {/if}
-{if is_set($sort_by)|not()} {def $sort_by = ''} {/if}
 
 <div class="context-block">
 {* DESIGN: Header START *}<div class="box-header"><div class="box-ml">
@@ -100,15 +102,16 @@
 
 <div class="button-right">
 <p class="table-preferences">
-{switch match=$sort_by}
-{case match='url'}
-<a href={'/urlm/list/'|ezurl} title="{'Sort by modified.'|i18n( 'design/admin/url/list' )}">{'Modified'|i18n( 'design/admin/url/list' )}</a>
-<span class="current">{'Url'|i18n( 'design/admin/url/list' )}</span>
+{switch match=$sort_by_option}
+
+{case match='modified'}
+<span class="current">{'Modified'|i18n( 'design/admin/url/list' )}</span>
+<a href={'/user/preferences/set/admin_urlm_list_sort/2'|ezurl} title="{'Sort by url.'|i18n( 'design/admin/url/list' )}">{'Url'|i18n( 'design/admin/url/list' )}</a>
 {/case}
 
-{case}
-<span class="current">{'Modified'|i18n( 'design/admin/url/list' )}</span>
-<a href={'/urlm/list/(sort_by)/url'|ezurl} title="{'Sort by url.'|i18n( 'design/admin/url/list' )}">{'Url'|i18n( 'design/admin/url/list' )}</a>
+{case match='url'}
+<a href={'/user/preferences/set/admin_urlm_list_sort/1'|ezurl} title="{'Sort by modified.'|i18n( 'design/admin/url/list' )}">{'Modified'|i18n( 'design/admin/url/list' )}</a>
+<span class="current">{'Url'|i18n( 'design/admin/url/list' )}</span>
 {/case}
 
 {/switch}

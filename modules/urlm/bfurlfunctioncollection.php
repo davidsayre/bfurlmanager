@@ -76,8 +76,8 @@ class bfURLFunctionCollection
                 $conditionQuery = " AND ezurl.is_valid=$isValid ";
             }
             
-            //DJS new filter by
-            if ( $conditions['url'] !== null )
+            //DJS new condition field 'url'
+            if ( $conditions['url'] != '' )
             {                
                 $conditionQuery = " AND ezurl.url like '". $conditions['url'] ."'";
             }
