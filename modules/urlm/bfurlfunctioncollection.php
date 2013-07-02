@@ -30,7 +30,8 @@ class bfURLFunctionCollection
                                           'offset' => false,
                                           'limit' => false,
                                           'only_published' => true,
-                                          'filter_by' => ''
+                                          'filter_by' => '',
+                                          'sort_by' => ''
                                           ),
                                    $parameters );
         $asObject = $parameters['as_object'];
@@ -42,16 +43,19 @@ class bfURLFunctionCollection
         if ( !$asCount and $offset !== false and $limit !== false )
             $limitArray = array( 'offset' => $offset,
                                  'length' => $limit );
-        $conditions = array();
 
-        //DJS new sort by url
-        $sortQuery = " order by ezurl.url";
+        $conditions = array();
 
         //DJS new filter by url condition
         $filterBy = $parameters['filter_by'];
         if($filterBy != '') {
             $conditions['url'] = '%'.$filterBy.'%';
         }
+
+        //DJS new sort by url
+        $sortBy = $parameters['sort_by'];
+        $sortQuery = " order by ezurl.modified desc";
+        if( $sortBy == 'url') { $sortQuery = " order by ezurl.url"; }     
 
         if( $isValid === false ) $isValid = 0;
         if ( $isValid !== null )
@@ -145,7 +149,6 @@ class bfURLFunctionCollection
         }
         else
         {
-            print_r('Not publish');
             if ( $asCount )
             {
                 $urls = eZPersistentObject::fetchObjectList( eZURL::definition(),

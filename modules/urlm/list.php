@@ -30,6 +30,8 @@ if ( $http->hasPostVariable( 'filterBy' ) ){    //from form post
     $filterBy = $http->postVariable( 'filterBy' );
 }
 
+$sortBy = $UserParameters['sort']; //from pagination
+
 $offset = $Params['Offset'];
 if ( !is_numeric( $offset ) )
 {
@@ -59,7 +61,8 @@ if( $ViewMode == 'all' )
                              'offset'         => $offset,
                              'limit'          => $limit,
                              'only_published' => true,
-                             'filter_by'  => $filterBy );
+                             'filter_by'  => $filterBy,
+                             'sort_by' => $sortBy );
 
     $countParameters = array( 'only_published' => true,
                              'filter_by'  => $filterBy );
@@ -70,7 +73,8 @@ elseif( $ViewMode == 'valid' )
                              'offset'         => $offset,
                              'limit'          => $limit,
                              'only_published' => true,
-                             'filter_by'  => $filterBy );
+                             'filter_by'  => $filterBy,
+                             'sort_by' => $sortBy );
 
     $countParameters = array( 'is_valid' => true,
                               'only_published' => true,
@@ -82,7 +86,8 @@ elseif( $ViewMode == 'invalid' )
                              'offset'         => $offset,
                              'limit'          => $limit,
                              'only_published' => true,
-                             'filter_by'  => $filterBy);
+                             'filter_by'  => $filterBy,
+                             'sort_by' => $sortBy);
 
     $countParameters = array( 'is_valid' => false,
                               'only_published' => true,
@@ -102,6 +107,7 @@ $tpl->setVariable( 'url_list', $list );
 $tpl->setVariable( 'url_list_count', $listCount );
 $tpl->setVariable( 'view_mode', $ViewMode );
 $tpl->setVariable( 'filter_by', $filterBy );
+$tpl->setVariable( 'sort_by', $sortBy );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:url/list.tpl" );

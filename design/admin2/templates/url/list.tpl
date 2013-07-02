@@ -1,6 +1,9 @@
 {let item_type=ezpreference( 'admin_urlm_list_limit' )
      number_of_items=min( $item_type, 4)|choose( 10, 10, 25, 50, 100 )}
 
+{if is_set($filter_by)|not()} {def $filter_by = ''} {/if}
+{if is_set($sort_by)|not()} {def $sort_by = ''} {/if}
+
 <div class="context-block">
 {* DESIGN: Header START *}<div class="box-header"><div class="box-ml">
 
@@ -75,9 +78,9 @@
 <p class="table-preferences">
 {switch match=$view_mode}
 {case match='valid'}
-<a href={'/url/list/all'|ezurl} title="{'Show all URLs.'|i18n( 'design/admin/url/list' )}">{'All'|i18n( 'design/admin/url/list' )}</a>
+<a href={'/urlm/list/all'|ezurl} title="{'Show all URLs.'|i18n( 'design/admin/url/list' )}">{'All'|i18n( 'design/admin/url/list' )}</a>
 <span class="current">{'Valid'|i18n( 'design/admin/url/list' )}</span>
-<a href={'/url/list/invalid'|ezurl} title="{'Show only invalid URLs.'|i18n( 'design/admin/url/list' )}">{'Invalid'|i18n( 'design/admin/url/list' )}</a>
+<a href={'/urlm/list/invalid'|ezurl} title="{'Show only invalid URLs.'|i18n( 'design/admin/url/list' )}">{'Invalid'|i18n( 'design/admin/url/list' )}</a>
 {/case}
 
 {case match='invalid'}
@@ -94,6 +97,24 @@
 {/switch}
 </p>
 </div>
+
+<div class="button-right">
+<p class="table-preferences">
+{switch match=$sort_by}
+{case match='url'}
+<a href={'/urlm/list/'|ezurl} title="{'Sort by modified.'|i18n( 'design/admin/url/list' )}">{'Modified'|i18n( 'design/admin/url/list' )}</a>
+<span class="current">{'Url'|i18n( 'design/admin/url/list' )}</span>
+{/case}
+
+{case}
+<span class="current">{'Modified'|i18n( 'design/admin/url/list' )}</span>
+<a href={'/urlm/list/(sort)/url'|ezurl} title="{'Sort by url.'|i18n( 'design/admin/url/list' )}">{'Url'|i18n( 'design/admin/url/list' )}</a>
+{/case}
+
+{/switch}
+</p>
+</div>
+
 <div class="float-break"></div>
 </div>
 
