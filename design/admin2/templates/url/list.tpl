@@ -25,6 +25,7 @@
 
 {* DESIGN: Mainline *}<div class="header-mainline"></div>
 
+
 {* DESIGN: Header END *}</div></div>
 
 {* DESIGN: Content START *}<div class="box-ml"><div class="box-mr"><div class="box-content">
@@ -100,24 +101,6 @@
 </p>
 </div>
 
-<div class="button-right">
-<p class="table-preferences">
-{switch match=$sort_by_option}
-
-{case match='modified'}
-<span class="current">{'Modified'|i18n( 'design/admin/url/list' )}</span>
-<a href={'/user/preferences/set/admin_urlm_list_sort/2'|ezurl} title="{'Sort by url.'|i18n( 'design/admin/url/list' )}">{'Url'|i18n( 'design/admin/url/list' )}</a>
-{/case}
-
-{case match='url'}
-<a href={'/user/preferences/set/admin_urlm_list_sort/1'|ezurl} title="{'Sort by modified.'|i18n( 'design/admin/url/list' )}">{'Modified'|i18n( 'design/admin/url/list' )}</a>
-<span class="current">{'Url'|i18n( 'design/admin/url/list' )}</span>
-{/case}
-
-{/switch}
-</p>
-</div>
-
 <div class="float-break"></div>
 </div>
 
@@ -132,10 +115,10 @@
 <table class="list" cellspacing="0">
 
 <tr>
-  <th>{'Address'|i18n( 'design/admin/url/list' )}</th>
+  <th><a href={'/user/preferences/set/admin_urlm_list_sort/2'|ezurl} title="{'Sort by url.'|i18n( 'design/admin/url/list' )}" class="{if $sort_type|eq(2)}active{/if}">{'Url'|i18n( 'design/admin/url/list' )}</a></th>
   <th>{'Status'|i18n( 'design/admin/url/list' )}</th>
   <th>{'Checked'|i18n( 'design/admin/url/list' )}</th>
-  <th>{'Modified'|i18n( 'design/admin/url/list' )}</th>
+  <th><a href={'/user/preferences/set/admin_urlm_list_sort/1'|ezurl} title="{'Sort by modified.'|i18n( 'design/admin/url/list' )}" class="{if $sort_type|eq(1)}active{/if}">{'Modified'|i18n( 'design/admin/url/list' )}</a></th>
   <th class="tight">&nbsp;</th>
 </tr>
 
